@@ -27,7 +27,7 @@
                     <td><?php echo "<a href=$modulelink&page=server_details&server_id=" . $rows[server_id] . ">" . $rows[server_name] . "</a>"; ?></td>
                     <td><?php echo $rows[location] ; ?></td>
                     <td><?php echo $rows[main_ip_address] ; ?></td>
-                    <td></td>
+                    <td><?php echo "<a href=clientssummary.php?userid=".$rows[client_id].">".$rows[firstname]." ".$rows[lastname]."</a>"; ?></td>
                     <td><?php echo $rows[os] ; ?></td>
                     <td><?php echo $rows[name] ; ?></td>
                     <td><?php echo $rows[cpu] ; ?></td>

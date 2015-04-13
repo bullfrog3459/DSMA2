@@ -25,16 +25,16 @@
                 ?>
                 <tr>
                     <td><?php echo "<a href=$modulelink&page=server_details&server_id=" . $rows[server_id] . ">" . $rows[server_name] . "</a>"; ?></td>
+                    <td><?php . $rows[location] . ?></td>
+                    <td><?php . $rows[main_ip_address] . ?></td>
                     <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-					<td></td>
+                    <td><?php . $rows[os] . ?></td>
+                    <td><?php . $rows[name] . ?></td>
+                    <td><?php . $rows[cpu] . ?></td>
+                    <td><?php . $rows[ram] . ?></td>
+                    <td><?php . $rows[hd0] . ?></td>
+                    <td><?php . $rows[bandwidth] . ?></td>
+					<td><?php . $rows[control_panel] . ?></td>
 					<td><?php echo "<a href=$modulelink&server_id=$rows[server_id]&action=server_delete>[x]</a>"; ?></td>
                 </tr>
     <!--                echo "<tr bgcolor=$bgcolor><td><a href=$modulelink&page=server_details&server_id=" . $rows[server_id] . ">" . $rows[server_name] . "</a></td><td>" . $rows[location] . "</td><td>" . $rows[main_ip_address] . "</td><td><a href=clientssummary.php?userid=" . $rows[client_id] . ">" . $rows[firstname] . " " . $rows[lastname] . "</a></td>

@@ -1,5 +1,5 @@
 <div id="box-header seperator ds_manage_main">
-    <p><a class="btn btn-primary" href="<?php echo $modulelink . '&action=add_server'; ?>" target="_blank">Add Server</a>
+    <p><a class="btn btn-primary" href="<?php echo $modulelink . '&action=add_server'; ?>">Add Server</a>
     <p>Below is a list of the currently available servers. Please click on server name to get the server details.</p>
     <table class="table table-bordered table-striped" width=100% cellspacing=0 cellpadding=5>
         <thead>
@@ -25,25 +25,22 @@
                 ?>
                 <tr>
                     <td><?php echo "<a href=$modulelink&page=server_details&server_id=" . $rows[server_id] . ">" . $rows[server_name] . "</a>"; ?></td>
-                    <td><?php . $rows[location] . ?></td>
-                    <td><?php . $rows[main_ip_address] . ?></td>
+                    <td><?php echo $rows[location] ; ?></td>
+                    <td><?php echo $rows[main_ip_address] ; ?></td>
                     <td></td>
-                    <td><?php . $rows[os] . ?></td>
-                    <td><?php . $rows[name] . ?></td>
-                    <td><?php . $rows[cpu] . ?></td>
-                    <td><?php . $rows[ram] . ?></td>
-                    <td><?php . $rows[hd0] . ?></td>
-                    <td><?php . $rows[bandwidth] . ?></td>
-					<td><?php . $rows[control_panel] . ?></td>
+                    <td><?php echo $rows[os] ; ?></td>
+                    <td><?php echo $rows[name] ; ?></td>
+                    <td><?php echo $rows[cpu] ; ?></td>
+                    <td><?php echo $rows[ram] ; ?></td>
+                    <td><?php echo $rows[hd0] ; ?></td>
+                    <td><?php echo $rows[bandwidth] ; ?></td>
+					<td><?php echo $rows[control_panel] ; ?></td>
 					<td><?php echo "<a href=$modulelink&server_id=$rows[server_id]&action=server_delete>[x]</a>"; ?></td>
                 </tr>
-    <!--                echo "<tr bgcolor=$bgcolor><td><a href=$modulelink&page=server_details&server_id=" . $rows[server_id] . ">" . $rows[server_name] . "</a></td><td>" . $rows[location] . "</td><td>" . $rows[main_ip_address] . "</td><td><a href=clientssummary.php?userid=" . $rows[client_id] . ">" . $rows[firstname] . " " . $rows[lastname] . "</a></td>
-                    <td>" . $rows[os] . "</td><td>" . $rows[name] . "</td><td>" . $rows[cpu] . "</td><td>" . $rows[ram] . "</td><td>" . $rows[hd0] . "</td><td>" . $rows[bandwidth] . "</td><td>" . $rows[control_panel] . "</td><td align=center><a href=$modulelink&server_id=$rows[server_id]&page=server_delete>[x]</a></td>
-                </tr>";-->
-                <?php
+            <?php
             }
             ?>
         </tbody>
     </table>
-    <p>You currently have a total of <b><?php $numservers ?></b> Servers.</p>
+    <p>You currently have a total of <b><?php echo $numservers ; ?></b> Servers.</p>
 </div>

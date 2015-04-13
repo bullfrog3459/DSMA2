@@ -1,6 +1,6 @@
-
+<p><a class="btn btn-primary" href="<?php echo $modulelink ; ?>">Server List</a>
 <p>Please use the following form to add a new server.</p>
-<form class="form-horizontal" action="<?= $modulelink; ?>&page=server_add" method="post">
+<form class="form-horizontal" action="<?php echo $modulelink . '&action=add_server'; ?>" method="post">
     <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
@@ -8,7 +8,7 @@
                 <div class="col-sm-8">
                     <select name="client_id" class="form-control">
                         <option value="0">None</option>
-                        <?
+                        <?php
                         $res = mysql_query("select * from tblclients order by BINARY firstname");
                         while ($row = mysql_fetch_array($res)) {
                             echo "<option value='" . $row[id] . "'>" . $row[firstname] . " " . $row[lastname] . "</option>";
@@ -234,56 +234,85 @@
                 </div>
             </div>
         </div>
+		<div class="col-lg-6">
+            <div class="form-group">
+                <label for="vps" class="col-sm-4 control-label">VPS:</label>
+                <div class="col-sm-8">
+                    <input type=text name="vps" class="form-control"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="vps_node" class="col-sm-4 control-label">VPS Node:</label>
+                <div class="col-sm-8">
+                    <input type=text name="vps_node" class="form-control"/>
+                </div>
+            </div>
+        </div>
+		<div class="col-lg-6">
+            <div class="form-group">
+                <label for="switch" class="col-sm-4 control-label">Switch:</label>
+                <div class="col-sm-8">
+                    <input type=text name="switch" class="form-control"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="switch_port" class="col-sm-4 control-label">Switch Port:</label>
+                <div class="col-sm-8">
+                    <input type=text name="switch_port" class="form-control"/>
+                </div>
+            </div>
+        </div>
+		<div class="col-lg-6">
+            <div class="form-group">
+                <label for="rack_name_number" class="col-sm-4 control-label">Rack Name/Number:</label>
+                <div class="col-sm-8">
+                    <input type=text name="rack_name_number" class="form-control"/>
+                </div>
+            </div>
+			<div class="form-group">
+                <label for="rack_position" class="col-sm-4 control-label">Rack Position:</label>
+                <div class="col-sm-8">
+                    <input type=text name="rack_position" class="form-control"/>
+                </div>
+            </div>
+        </div>
+		<div class="col-lg-6">
+            
+            <div class="form-group">
+                <label for="ups" class="col-sm-4 control-label">UPS:</label>
+                <div class="col-sm-8">
+                    <input type=text name="ups" class="form-control"/>
+                </div>
+            </div>
+			<div class="form-group">
+                <label for="ups_port" class="col-sm-4 control-label">UPS Port:</label>
+                <div class="col-sm-8">
+                    <input type=text name="ups_port" class="form-control"/>
+                </div>
+            </div>
+        </div>
+		<div class="col-lg-6">
+            <div class="form-group">
+                <label for="pdu" class="col-sm-4 control-label">PDU:</label>
+                <div class="col-sm-8">
+                    <input type=text name="pdu" class="form-control"/>
+                </div>
+            </div>
+			<div class="form-group">
+                <label for="pdu_port" class="col-sm-4 control-label">PDU Port:</label>
+                <div class="col-sm-8">
+                    <input type=text name="pdu_port" class="form-control"/>
+                </div>
+            </div>
+        </div>
+		<div class="col-lg-6">
+            <div class="form-group">
+                <label for="notes" class="col-sm-4 control-label">Notes:</label>
+                <div class="col-sm-8">
+                    <textarea name="notes" rows="7" cols="35"></textarea>
+                </div>
+            </div>
+        </div>
     </div>
-</form>
-<form action="<?= $modulelink; ?>&page=server_add" method="post">
-    <input type="hidden" name="posted" value="yes" />
-    <table>
-        
-        <tr><td>Main IP Address:</td><td><input type=text name="main_ip_address" /></td></tr>
-        <tr><td>Additional IP Addresses:</td><td><input type=text name="additional_ip_addresses" /></td></tr>
-        <tr><td>Multiple NIC's:</td><td><input type=text name="multiple_nics" /></td></tr>
-        <tr><td>DRAC IP:</td><td><input type=text name="drac_ip" /></td></tr>
-        <tr><td>Location:</td><td><input type=text name="location" /></td></tr>
-        <tr><td>OS:</td><td><input type=text name="os" /> </td></tr>
-        <tr><td>Administrative Username:</td><td><input type=text name="root_username" /></td></tr>
-        <tr><td>Root Password:</td><td><input type=text name="root_pass" /></td></tr>
-        <tr><td>SSH Port:</td><td><input type=text name="ssh_port" /></td></tr>
-        <tr><td>RDC Port:</td><td><input type=text name="rdc_port" /></td></tr>
-        <tr><td>Control Panel:</td><td><input type=text name="control_panel" /></td></tr>
-        <tr><td>CPU:</td><td><input type=text name="cpu" /></td></tr>
-        <tr><td>CPU Cache:</td><td><input type=text name="cpu_cache" /></td></tr>
-        <tr><td>CPU Speed:</td><td><input type=text name="cpu_ghz" /></td></tr>
-        <tr><td>RAM:</td><td><input type=text name="ram" /></td></tr>
-        <tr><td>RAM Speed:</td><td><input type=text name="ram_speed" /></td></tr>
-        <tr><td>Bandwidth:</td><td><input type=text name="bandwidth" /></td></tr>
-        <tr><td>Drive Controller:</td><td><input type=text name="drive_controller" /></td></tr>
-        <tr><td>Primary Hard Disk:</td><td><input type=text name="hd0" /></td></tr>
-        <tr><td>Secondary Hard Disk:</td><td><input type=text name="hd1" /></td></tr>
-        <tr><td>Tertiary Hard Disk:</td><td><input type=text name="hd2" /></td></tr>
-        <tr><td>Fourth Hard Disk:</td><td><input type=text name="hd3" /></td></tr>
-        <tr><td>Drive RAID:</td><td><input type=text name="drive_raid" /></td></tr>
-        <tr><td>Multiple PSU's:</td><td><input type=text name="multiple_psus" /></td></tr>
-        <tr><td>Chassis Brand:</td><td><input type=text name="chassis_brand" /></td></tr>
-        <tr><td>Chassis Model:</td><td><input type=text name="chassis_model" /></td></tr>
-        <tr><td>Service Tag:</td><td><input type=text name="service_tag" /></td></tr>
-        <tr><td>Asset Tag:</td><td><input type=text name="asset_tag" /></td></tr>
-        <tr><td>Warranty Expiration:</td><td><input type=text name="warranty_expiration" /></td></tr>
-        <tr><td>Managed or Unmanaged:</td><td><input type=text name="managed" /></td></tr>
-        <tr><td>VPS:</td><td><input type=text name="vps" /></td></tr>
-        <tr><td>VPS Node:</td><td><input type=text name="vps_node" /></td></tr>
-        <tr><td>Switch:</td><td><input type=text name="switch_id" /></td></tr>
-        <tr><td>Switch Port:</td><td><input type=text name="switch_port" /></td></tr>
-        <tr><td>Switch Speed:</td><td><input type=text name="switch_speed" /></td></tr>
-        <tr><td>Rack Name/Number:</td><td><input type=text name="rack_name_number" /></td></tr>
-        <tr><td>Rack Position:</td><td><input type=text name="rack_position" /></td></tr>
-        <tr><td>UPS:</td><td><input type=text name="ups" /></td></tr>
-        <tr><td>UPS Port:</td><td><input type=text name="ups_port" /></td></tr>
-        <tr><td>PDU:</td><td><input type=text name="pdu_id" /></td></tr>
-        <tr><td>PDU Port:</td><td><input type=text name="pdu_port" /></td></tr>
-        <tr><td valign="top">Contract Terms:</td><td><textarea name="contract_terms" rows="7" cols="35"></textarea></td></tr>
-        <tr><td valign="top">Notes:</td><td><textarea name="server_notes" rows="7" cols="35"></textarea></td></tr>
-        <tr><td colspan="2" align="center"><input type="submit" value="Add Server" /></td></tr>
-    </table>
-
+	<input type="submit" value="Add Server" class="btn btn-primary"/>
 </form>

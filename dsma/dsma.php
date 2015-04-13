@@ -1,16 +1,15 @@
 <?php
-
 if (!defined("WHMCS"))
     die("This file cannot be accessed directly");
 
 function dsma_config() {
     $configarray = array(
-    "name" => "Dedicated Server Management Addon",
-    "description" => "This is an open source addon module for dedicated server management.",
-    "version" => "1.0",
-    "author" => "Jeremiah Shinkle",
-    "language" => "english",
-);
+        "name" => "Dedicated Server Management Addon",
+        "description" => "This is an open source addon module for dedicated server management.",
+        "version" => "1.0",
+        "author" => "Jeremiah Shinkle",
+        "language" => "english",
+    );
     return $configarray;
 }
 
@@ -70,9 +69,8 @@ function dsma_activate() {
     $result = full_query($query);
 
     # Return Result
-    return array('status'=>'success','description'=>'Dedicated Server Module Installed Successfully.');
-    return array('status'=>'error','description'=>'Dedicated Server Module Failed to Install. Please check the logs and try again.');
-
+    return array('status' => 'success', 'description' => 'Dedicated Server Module Installed Successfully.');
+    return array('status' => 'error', 'description' => 'Dedicated Server Module Failed to Install. Please check the logs and try again.');
 }
 
 function dsma_deactivate() {
@@ -82,56 +80,51 @@ function dsma_deactivate() {
     $result = full_query($query);
 
     # Return Result
-    return array('status'=>'success','description'=>'Dedicated Server Module Removed Successfully');
-    return array('status'=>'error','description'=>'Dedicated Server Module Failed to remove. Please check the logs and try again.');
-
+    return array('status' => 'success', 'description' => 'Dedicated Server Module Removed Successfully');
+    return array('status' => 'error', 'description' => 'Dedicated Server Module Failed to remove. Please check the logs and try again.');
 }
 
 function dsma_output($vars) {
 
-    $modulelink = $vars['modulelink'];
-
-echo '<div style="padding: 15px 15px 10px 6px;border: 1px solid #DDDDDD;border-radius: 4px 4px 4px 4px;border-left: 0px;border-right: 0px;box-shadow: 0 1px 3px rgba(0,0,0,0.1);-webkit-border-radius-topright: 5px;-webkit-border-radius-topleft: 5px;-moz-border-radius-topright: 5px;-moz-border-radius-topleft: 5px;" id="box-header seperator ds_manage_main">
-<p><a class="btn" href=$modulelink&page=add_server target="_blank">Add Server</a><p>Below is a list of the currently available servers. Please click on server name to get the server details.</p><table class="table table-bordered" width=100% cellspacing=0 cellpadding=5>
-<tr><td><b>Name</b></td><td><b>Location</b></td><td><b>Primary IP Address</b></td><td><b>Owner</b></td><td><b>OS</b></td><td><b>Product</b></td>
-<td><b>CPU</b></td><td><b>RAM</b></td><td><b>Primary Hard Drive</b></td><td><b>Bandwidth</b></td><td><b>Control Panel</b></td><td align="center"><b>Delete</b></td></tr>';
-
-
-	$res=mysql_query("select * from mod_dsma left join tblclients on (mod_dsma.client_id=tblclients.id) left join tblproducts on (mod_dsma.product_id=tblproducts.id) order by mod_dsma.server_id");
-	$numservers=mysql_num_rows($res);
-	while($rows=mysql_fetch_array($res))
-
-{
-$odd=$odd+1;
-
-if ($odd%2)
-{
-$bgcolor="#eeeeee";
-}
-else
-{
-$bgcolor="#ffffff";
-}
-echo "<tr bgcolor=$bgcolor><td><a href=$modulelink&page=server_details&server_id=".$rows[server_id].">".$rows[server_name]."</a></td><td>".$rows[location]."</td><td>".$rows[main_ip_address]."</td><td><a href=clientssummary.php?userid=".$rows[client_id].">".$rows[firstname]." ".$rows[lastname]."</a></td>
-<td>".$rows[os]."</td><td>".$rows[name]."</td><td>".$rows[cpu]."</td><td>".$rows[ram]."</td><td>".$rows[hd0]."</td><td>".$rows[bandwidth]."</td><td>".$rows[control_panel]."</td><td align=center><a href=$modulelink&server_id=$rows[server_id]&action=deleteserver>[x]</a></td>
-</tr>";
+    $moduledir = $vars['modulelink'];
+    $vars['moduledir'] = '../modules/addons/dsma/';
+    $action = get_action();
+    require_once 'app.php';
+    dsma_header($vars);
+    $action($vars);
+    echo '</div></div>';
 }
 
-echo "</table>
-<p>You currently have a total of <b>$numservers</b> Servers.</p>";
-}
+function dsma_header($vars) {
+    ?>
+    <link href="<?php echo $vars['moduledir'] ?>css/bootstrap.css" type="text/css" rel="stylesheet"/>
+    <link href="<?php echo $vars['moduledir'] ?>/style.css" type="text/css" rel="stylesheet"/>
+    <div class="dmca-panel panel panel-default">
+        <div class="panel-body">
 
-function dsma_sidebar($vars) {
+            <?php
+        }
 
-    $modulelink = $vars['modulelink'];
-	$version = $vars['version'];
-    $LANG = $vars['_lang'];
+        function get_action() {
+            if (isset($_GET['action'])) {
+                $action = $_GET['action'];
+            } else {
+                $action = 'index';
+            }
+            return $action;
+        }
 
-    $sidebar = '<span class="header"><img src="images/icons/addonmodules.png" class="absmiddle" width="16" height="16" /> DSMA</span>
-<ul class="menu">
-        <li><a href="#">DSMA</a></li>
-        <li><a href="#">Version: '.$version.'</a></li>
-    </ul>';
-    return $sidebar;
-
-}
+//function dsma_sidebar($vars) {
+//
+//    $modulelink = $vars['modulelink'];
+//    $version = $vars['version'];
+//    $LANG = $vars['_lang'];
+//
+//    $sidebar = '<span class="header"><img src="images/icons/addonmodules.png" class="absmiddle" width="16" height="16" /> DSMA</span>
+//<ul class="menu">
+//        <li><a href="#">DSMA</a></li>
+//        <li><a href="#">Version: ' . $version . '</a></li>
+//    </ul>';
+//    return $sidebar;
+//}
+        ?>

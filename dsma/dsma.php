@@ -97,7 +97,7 @@ echo '<div style="padding: 15px 15px 10px 6px;border: 1px solid #DDDDDD;border-r
 <td><b>CPU</b></td><td><b>RAM</b></td><td><b>Primary Hard Drive</b></td><td><b>Bandwidth</b></td><td><b>Control Panel</b></td><td align="center"><b>Delete</b></td></tr>';
 
 
-	$res=mysql_query("select * from mod_dsma left join tblclients on (mod_dsma.client_id=tblclients.id) left join tblproducts on (mod_dsma.product_id=tblproducts.id)");
+	$res=mysql_query("select * from mod_dsma left join tblclients on (mod_dsma.client_id=tblclients.id) left join tblproducts on (mod_dsma.product_id=tblproducts.id) order by mod_dsma.server_id");
 	$numservers=mysql_num_rows($res);
 	while($rows=mysql_fetch_array($res))
 
@@ -113,7 +113,7 @@ else
 $bgcolor="#ffffff";
 }
 echo "<tr bgcolor=$bgcolor><td><a href=$modulelink&page=server_details&server_id=".$rows[server_id].">".$rows[server_name]."</a></td><td>".$rows[location]."</td><td>".$rows[main_ip_address]."</td><td><a href=clientssummary.php?userid=".$rows[client_id].">".$rows[firstname]." ".$rows[lastname]."</a></td>
-<td>".$rows[os]."</td><td>".$rows[name]."</td><td>".$rows[cpu]."</td><td>".$rows[ram]."</td><td>".$rows[hd0]."</td><td>".$rows[bandwidth]."</td><td>".$rows[control_panel]."</td><td align=center><a href=$modulelink&server_id=$rows[server_id]&page=server_delete>[x]</a></td>
+<td>".$rows[os]."</td><td>".$rows[name]."</td><td>".$rows[cpu]."</td><td>".$rows[ram]."</td><td>".$rows[hd0]."</td><td>".$rows[bandwidth]."</td><td>".$rows[control_panel]."</td><td align=center><a href=$modulelink&server_id=$rows[server_id]&action=deleteserver>[x]</a></td>
 </tr>";
 }
 

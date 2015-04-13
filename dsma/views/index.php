@@ -34,6 +34,8 @@
                     <td></td>
                     <td></td>
                     <td></td>
+					<td></td>
+					<td><?php echo "<a href=$modulelink&server_id=$rows[server_id]&action=server_delete>[x]</a>"; ?></td>
                 </tr>
     <!--                echo "<tr bgcolor=$bgcolor><td><a href=$modulelink&page=server_details&server_id=" . $rows[server_id] . ">" . $rows[server_name] . "</a></td><td>" . $rows[location] . "</td><td>" . $rows[main_ip_address] . "</td><td><a href=clientssummary.php?userid=" . $rows[client_id] . ">" . $rows[firstname] . " " . $rows[lastname] . "</a></td>
                     <td>" . $rows[os] . "</td><td>" . $rows[name] . "</td><td>" . $rows[cpu] . "</td><td>" . $rows[ram] . "</td><td>" . $rows[hd0] . "</td><td>" . $rows[bandwidth] . "</td><td>" . $rows[control_panel] . "</td><td align=center><a href=$modulelink&server_id=$rows[server_id]&page=server_delete>[x]</a></td>
@@ -43,5 +45,5 @@
             ?>
         </tbody>
     </table>
-    <p>You currently have a total of <b>$numservers</b> Servers.</p>
+    <p>You currently have a total of <b><?php $numservers ?></b> Servers.</p>
 </div>

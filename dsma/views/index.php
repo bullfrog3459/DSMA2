@@ -5,6 +5,9 @@
     <p>
         <a class="btn btn-primary" href="<?php echo $modulelink; ?>">Server List</a>
         <a class="btn btn-primary" href="<?php echo $modulelink . '&action=add_server'; ?>">Add Server</a>
+		<a class="btn btn-primary" href="<?php echo $modulelink . '&action=rack'; ?>">Racks</a>
+		<a class="btn btn-primary" href="<?php echo $modulelink . '&action=switches'; ?>">Switches</a>
+		<a class="btn btn-primary" href="<?php echo $modulelink . '&action=locations'; ?>">Locations</a>
     <p>Below is a list of the currently available servers. Please click on server name to get the server details.</p>
     <table class="table table-bordered table-striped" width=100% cellspacing=0 cellpadding=5>
         <thead>
@@ -29,7 +32,7 @@
             while ($rows = mysql_fetch_array($res)) {
                 ?>
                 <tr>
-                    <td><?php echo "<a href=$modulelink&page=server_details&server_id=" . $rows[server_id] . ">" . $rows[server_name] . "</a>"; ?></td>
+                    <td><?php echo $rows[server_name]; ?></td>
                     <td><?php echo $rows[location]; ?></td>
                     <td><?php echo $rows[main_ip_address]; ?></td>
                     <td><?php echo "<a href=clientssummary.php?userid=" . $rows[client_id] . ">" . $rows[firstname] . " " . $rows[lastname] . "</a>"; ?></td>

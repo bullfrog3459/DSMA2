@@ -6,7 +6,7 @@ function dsma_config() {
     $configarray = array(
         "name" => "Dedicated Server Management Addon",
         "description" => "This is an open source addon module for dedicated server management.",
-        "version" => "1.0",
+        "version" => "1.1",
         "author" => "Jeremiah Shinkle",
         "language" => "english",
     );

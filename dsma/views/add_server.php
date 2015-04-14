@@ -8,7 +8,7 @@
                 <label for="inputEmail3" class="col-sm-4 control-label">Owner:</label>
                 <div class="col-sm-8">
                     <select name="client_id" class="form-control">
-                        <option value="0">None</option>
+                        <option value="0">Internal</option>
                         <?php
                         $res = mysql_query("select * from tblclients order by BINARY firstname");
                         while ($row = mysql_fetch_array($res)) {

@@ -10,6 +10,26 @@ function index($vars) {
     require_once 'views/index.php';
 }
 
+function rack($vars) {
+    $modulelink = $vars['modulelink'];
+    $res = mysql_query("select * from mod_dsma_rack left join mod_dsma_locations on (mod_dsma_rack.location_id=mod_dsma_locations.location_id) left join tblclients on (mod_dsma_rack.client_id=tblclients.id) order by location_name");
+    require_once 'views/rack.php';
+//
+//    echo "</table>
+//<p>You currently have a total of <b>$numservers</b> Servers.</p>";
+    require_once 'views/rack.php';
+}
+
+function locations($vars) {
+    $modulelink = $vars['modulelink'];
+    $res = mysql_query("select * from mod_dsma_locations order by 'location_id'");
+    require_once 'views/locations.php';
+//
+//    echo "</table>
+//<p>You currently have a total of <b>$numservers</b> Servers.</p>";
+    require_once 'views/locations.php';
+}
+
 function add_server($vars) {
     $modulelink = $vars['modulelink'];
     if (isset($_POST['save'])) {
@@ -58,7 +78,7 @@ function add_server($vars) {
         unset($_POST['token']);
         if (mysql_num_rows($res) == 0) {
             $query = full_query("INSERT INTO mod_dsma (client_id,main_ip_address,server_name,additional_ip_addresses,multiple_nics,drac_ip,location,os,root_username,root_pass,ssh_port,rdc_port,control_panel,cpu,cpu_cache,cpu_ghz,ram,ram_speed,bandwidth,drive_controller,hd0,hd1,hd2,hd3,drive_raid,chassis_brand,chassis_model,service_tag,asset_tag,warranty_expiration,managed,vps,vps_node,switch_id,switch_port,rack_name_number,rack_position,ups,ups_port,pdu_id,pdu_port,server_notes) " . " VALUES ('" . $clientID . "', '" . $mainip_add . "', '" . $servername . "', '" . $addip_add . "', '" . $multiple_nics . "', '" . $dracip . "', '" . $location . "', '" . $os . "', '" . $root_username . "', '" . $root_pass . "', '" . $sshport . "', '" . $rdcport . "', '" . $controlpanel . "', '" . $cpu . "', '" . $cpucache . "', '" . $cpuspeed . "', '" . $ram . "', '" . $ramspeed . "', '" . $bandwidht . "', '" . $drivecon . "', '" . $hd0 . "', '" . $hd1 . "', '" . $hd2 . "', '" . $hd3 . "', '" . $driveraid . "', '" . $chassisbrand . "', '" . $chassisemodel . "', '" . $servicetag . "', '" . $assettag . "', '" . $warranty_exp . "', '" . $managed . "', '" . $vps . "', '" . $vpsnode . "', '" . $switch . "', '" . $switch_port . "', '" . $rack_no . "', '" . $rack_position . "', '" . $ups . "', '" . $ups_port . "', '" . $pdu . "', '" . $pdu_port . "', '" . $notes . "')");
-            header('Location: /whmcs_d/admin/addonmodules.php?module=dsma');
+            header('Location: /theboss/addonmodules.php?module=dsma');
         } else {
             $query = "";
         }
@@ -130,11 +150,102 @@ function update_edit_server() {
      ,drive_controller='$drivecon',hd0='$hd0',hd1='$hd1',hd2='$hd2',hd3='$hd3',drive_raid='$driveraid',chassis_brand='$chassisbrand',chassis_model='$chassisemodel',
      multiple_psus='$multiplepsus',service_tag='$servicetag',asset_tag='$assettag',warranty_expiration='$warranty_exp',managed='$managed',vps='$vps',vps_node='$vpsnode',switch_id='$switch',
      switch_port='$switch_port',rack_name_number='$rack_no',rack_position='$rack_position',ups='$ups',ups_port='$ups_port',pdu_id='$pdu',pdu_port='$pdu_port',server_notes='$notes' WHERE server_id =$serverid");
-    header('Location: /whmcs_d/admin/addonmodules.php?module=dsma');
+    header('Location: /theboss/addonmodules.php?module=dsma');
 }
 
 function server_delete() {
     $id = $_GET['server_id'];
     $del = full_query("DELETE  FROM mod_dsma where server_id= $id");
-    header('Location: /whmcs_d/admin/addonmodules.php?module=dsma');
+    header('Location: /theboss/addonmodules.php?module=dsma');
+}
+
+function add_rack($vars) {
+    $modulelink = $vars['modulelink'];
+    if (isset($_POST['save'])) {
+        $clientID = $_POST['client_id'];
+        $locationID = $_POST['location_id'];
+        $rackname = $_POST['rack_name'];
+        unset($_POST['token']);
+        if (mysql_num_rows($res) == 0) {
+            $query = full_query("INSERT INTO mod_dsma_rack (client_id,location_id,rack_name) " . " VALUES ('" . $clientID . "', '" . $locationID . "', '" . $rackname . "')");
+            header('Location: /theboss/addonmodules.php?module=dsma&action=rack');
+        } else {
+            $query = "";
+        }
+    }
+
+
+    require_once 'views/add_rack.php';
+}
+
+function rack_delete() {
+    $id = $_GET['rack_id'];
+    $del = full_query("DELETE  FROM mod_dsma_rack where rack_id= $id");
+    header('Location: /theboss/addonmodules.php?module=dsma&action=rack');
+}
+
+function edit_rack($vars) {
+    $id = $_GET['rack_id'];
+    $query = full_query("SELECT * FROM mod_dsma_rack WHERE rack_id='$id' ");
+    $results = mysql_fetch_assoc($query);
+    $modulelink = $vars['modulelink'];
+    require_once 'views/edit_rack.php';
+}
+
+function update_edit_rack() {
+//    debug($_POST);
+//    die();
+		$rackid = $_POST['id'];
+        $clientID = $_POST['client_id'];
+        $locationID = $_POST['location_id'];
+        $rackname = $_POST['rack_name'];
+
+
+    $query = full_query("UPDATE mod_dsma_rack SET client_id = '$clientID', location_id = '$locationID', rack_name='$rackname' WHERE rack_id =$rackid");
+    header('Location: /theboss/addonmodules.php?module=dsma&action=rack');
+}
+
+function add_location($vars) {
+    $modulelink = $vars['modulelink'];
+    if (isset($_POST['save'])) {
+        $location = $_POST['location_name'];
+        $address = $_POST['location_address'];
+        
+        unset($_POST['token']);
+        if (mysql_num_rows($res) == 0) {
+            $query = full_query("INSERT INTO mod_dsma_locations (location_name,location_address) " . " VALUES ('" . $location . "', '" . $address . "')");
+            header('Location: /theboss/addonmodules.php?module=dsma&action=locations');
+        } else {
+            $query = "";
+        }
+    }
+
+
+    require_once 'views/add_location.php';
+}
+
+function location_delete() {
+    $id = $_GET['location_id'];
+    $del = full_query("DELETE FROM mod_dsma_locations where location_id= $id");
+    header('Location: /theboss/addonmodules.php?module=dsma&action=locations');
+}
+
+function edit_location($vars) {
+    $id = $_GET['location_id'];
+    $query = full_query("SELECT * FROM mod_dsma_locations WHERE location_id='$id' ");
+    $results = mysql_fetch_assoc($query);
+    $modulelink = $vars['modulelink'];
+    require_once 'views/edit_location.php';
+}
+
+function update_edit_location() {
+//    debug($_POST);
+//    die();
+		$locationid = $_POST['id'];
+        $location = $_POST['location_name'];
+        $address = $_POST['location_address'];
+
+
+    $query = full_query("UPDATE mod_dsma_locations SET location_name = '$location', location_address = '$address' WHERE location_id =$locationid");
+    header('Location: /theboss/addonmodules.php?module=dsma&action=locations');
 }

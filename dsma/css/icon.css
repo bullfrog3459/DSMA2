@@ -1,0 +1,205 @@
+@font-face {
+	font-family: 'icomoon';
+	src:url('fonts/icomoon.eot?gfuq31');
+	src:url('fonts/icomoon.eot?#iefixgfuq31') format('embedded-opentype'),
+		url('fonts/icomoon.woff?gfuq31') format('woff'),
+		url('fonts/icomoon.ttf?gfuq31') format('truetype'),
+		url('fonts/icomoon.svg?gfuq31#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-arrow-right:before {
+	content: "\e63b";
+}
+.icon-account-settings-icon:before {
+	content: "\e600";
+}
+.icon-content-manager-icon:before {
+	content: "\e601";
+}
+.icon-menu-manager-icon:before {
+	content: "\e602";
+}
+.icon-modules-icon:before {
+	content: "\e603";
+}
+.icon-settings-icon:before {
+	content: "\e604";
+}
+.icon-system-icon:before {
+	content: "\e605";
+}
+.icon-variables-icon:before {
+	content: "\e606";
+}
+.icon-active-call-center-icon:before {
+	content: "\e607";
+}
+.icon-active-calls-icon:before {
+	content: "\e608";
+}
+.icon-active-conferences-icon:before {
+	content: "\e609";
+}
+.icon-active-extensions-icon:before {
+	content: "\e60a";
+}
+.icon-active-queues-icon:before {
+	content: "\e60b";
+}
+.icon-agent-status-icon:before {
+	content: "\e60c";
+}
+.icon-log-viewer-icon:before {
+	content: "\e60d";
+}
+.icon-registrations-icon:before {
+	content: "\e60e";
+}
+.icon-services-icon:before {
+	content: "\e60f";
+}
+.icon-sip-status-icon:before {
+	content: "\e610";
+}
+.icon-status-icon:before {
+	content: "\e611";
+}
+.icon-system-status-icon:before {
+	content: "\e612";
+}
+.icon-traffic-graph-icon:before {
+	content: "\e613";
+}
+.icon-settings-icon2:before {
+	content: "\e614";
+}
+.icon-destinations-icon:before {
+	content: "\e615";
+}
+.icon-dialplan-icon:before {
+	content: "\e616";
+}
+.icon-dialplan-manager-icon:before {
+	content: "\e617";
+}
+.icon-inbound-routes-icon:before {
+	content: "\e618";
+}
+.icon-outbound-routes-icon:before {
+	content: "\e619";
+}
+.icon-apps-icon:before {
+	content: "\e61a";
+}
+.icon-call-broadcast-icon:before {
+	content: "\e61b";
+}
+.icon-call-center-icon:before {
+	content: "\e61c";
+}
+.icon-call-detail-records-icon:before {
+	content: "\e61d";
+}
+.icon-call-flows-icon:before {
+	content: "\e61e";
+}
+.icon-conference-center-icon:before {
+	content: "\e61f";
+}
+.icon-contacts-icon:before {
+	content: "\e620";
+}
+.icon-fax-server-icon:before {
+	content: "\e621";
+}
+.icon-follow-me-icon:before {
+	content: "\e622";
+}
+.icon-hot-desking-icon:before {
+	content: "\e623";
+}
+.icon-hunt-groups-icon:before {
+	content: "\e624";
+}
+.icon-ivr-menu-icon:before {
+	content: "\e625";
+}
+.icon-music-on-hold-icon:before {
+	content: "\e626";
+}
+.icon-queues-icon:before {
+	content: "\e627";
+}
+.icon-recordings-icon:before {
+	content: "\e628";
+}
+.icon-ring-groups-icon:before {
+	content: "\e629";
+}
+.icon-schemas-icon:before {
+	content: "\e62a";
+}
+.icon-time-conditions-icon:before {
+	content: "\e62b";
+}
+.icon-voicemail-icon:before {
+	content: "\e62c";
+}
+.icon-account-icon:before {
+	content: "\e62d";
+}
+.icon-devices-icon:before {
+	content: "\e62e";
+}
+.icon-extensions-icon:before {
+	content: "\e62f";
+}
+.icon-gateways-icon:before {
+	content: "\e630";
+}
+.icon-user-manager-icon:before {
+	content: "\e631";
+}
+.icon-xmpp-manager-icon:before {
+	content: "\e632";
+}
+.icon-sip-profiles-icon:before {
+	content: "\e633";
+}
+.icon-group-manager-icon:before {
+	content: "\e634";
+}
+.icon-grammar-editor-icon:before {
+	content: "\e635";
+}
+.icon-domains-icon:before {
+	content: "\e636";
+}
+.icon-default-settings-icon:before {
+	content: "\e637";
+}
+.icon-command-icon:before {
+	content: "\e638";
+}
+.icon-app-manager-icon:before {
+	content: "\e639";
+}
+.icon-advanced-icon:before {
+	content: "\e63a";
+}

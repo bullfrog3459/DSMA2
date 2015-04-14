@@ -1,5 +1,10 @@
+<link href="<?php echo $vars['moduledir'] ?>css/font-awesome.min.css" type="text/css" rel="stylesheet"/>
+<link href="<?php echo $vars['moduledir'] ?>css/ionicons.min.css" type="text/css" rel="stylesheet"/>
+<link href="<?php echo $vars['moduledir'] ?>css/icon.css" type="text/css" rel="stylesheet"/>
 <div id="box-header seperator ds_manage_main">
-    <p><a class="btn btn-primary" href="<?php echo $modulelink . '&action=add_server'; ?>">Add Server</a>
+    <p>
+        <a class="btn btn-primary" href="<?php echo $modulelink; ?>">Server List</a>
+        <a class="btn btn-primary" href="<?php echo $modulelink . '&action=add_server'; ?>">Add Server</a>
     <p>Below is a list of the currently available servers. Please click on server name to get the server details.</p>
     <table class="table table-bordered table-striped" width=100% cellspacing=0 cellpadding=5>
         <thead>
@@ -15,7 +20,7 @@
                 <th>Primary Hard Drive</th>
                 <th>Bandwidth</th>
                 <th>Control Panel</th>
-                <th align="center">Delete</th>
+                <th align="center">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -25,22 +30,25 @@
                 ?>
                 <tr>
                     <td><?php echo "<a href=$modulelink&page=server_details&server_id=" . $rows[server_id] . ">" . $rows[server_name] . "</a>"; ?></td>
-                    <td><?php echo $rows[location] ; ?></td>
-                    <td><?php echo $rows[main_ip_address] ; ?></td>
-                    <td><?php echo "<a href=clientssummary.php?userid=".$rows[client_id].">".$rows[firstname]." ".$rows[lastname]."</a>"; ?></td>
-                    <td><?php echo $rows[os] ; ?></td>
-                    <td><?php echo $rows[name] ; ?></td>
-                    <td><?php echo $rows[cpu] ; ?></td>
-                    <td><?php echo $rows[ram] ; ?></td>
-                    <td><?php echo $rows[hd0] ; ?></td>
-                    <td><?php echo $rows[bandwidth] ; ?></td>
-					<td><?php echo $rows[control_panel] ; ?></td>
-					<td><?php echo "<a href=$modulelink&server_id=$rows[server_id]&action=server_delete>[x]</a>"; ?></td>
+                    <td><?php echo $rows[location]; ?></td>
+                    <td><?php echo $rows[main_ip_address]; ?></td>
+                    <td><?php echo "<a href=clientssummary.php?userid=" . $rows[client_id] . ">" . $rows[firstname] . " " . $rows[lastname] . "</a>"; ?></td>
+                    <td><?php echo $rows[os]; ?></td>
+                    <td><?php echo $rows[name]; ?></td>
+                    <td><?php echo $rows[cpu]; ?></td>
+                    <td><?php echo $rows[ram]; ?></td>
+                    <td><?php echo $rows[hd0]; ?></td>
+                    <td><?php echo $rows[bandwidth]; ?></td>
+                    <td><?php echo $rows[control_panel]; ?></td>
+                    <td>
+                        <?php echo '<a href = "addonmodules.php?module=dsma&action=edit_server&server_id=' . $rows[server_id] . '" class = "some other classes"><i class = "fa fa-fw fa-pencil"></i></a>
+<a href = "addonmodules.php?module=dsma&server_id=' . $rows[server_id] . '&action=server_delete" class = "some other classes"><i class = "fa fa-fw fa-trash-o"></i></a>'
+                        ?></td>
                 </tr>
-            <?php
+                <?php
             }
             ?>
         </tbody>
     </table>
-    <p>You currently have a total of <b><?php echo $numservers ; ?></b> Servers.</p>
+    <p>You currently have a total of <b><?php echo $numservers; ?></b> Servers.</p>
 </div>

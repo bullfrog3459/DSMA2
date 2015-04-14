@@ -4,30 +4,24 @@ function index($vars) {
     $modulelink = $vars['modulelink'];
     $res = mysql_query("select * from mod_dsma left join tblclients on (mod_dsma.client_id=tblclients.id) left join tblproducts on (mod_dsma.product_id=tblproducts.id)");
     require_once 'views/index.php';
-//
-//    echo "</table>
-//<p>You currently have a total of <b>$numservers</b> Servers.</p>";
-    require_once 'views/index.php';
 }
 
 function rack($vars) {
     $modulelink = $vars['modulelink'];
     $res = mysql_query("select * from mod_dsma_rack left join mod_dsma_locations on (mod_dsma_rack.location_id=mod_dsma_locations.location_id) left join tblclients on (mod_dsma_rack.client_id=tblclients.id) order by location_name");
     require_once 'views/rack.php';
-//
-//    echo "</table>
-//<p>You currently have a total of <b>$numservers</b> Servers.</p>";
-    require_once 'views/rack.php';
 }
 
 function locations($vars) {
     $modulelink = $vars['modulelink'];
-    $res = mysql_query("select * from mod_dsma_locations order by 'location_id'");
+    $res = mysql_query("select * from mod_dsma_locations order by location_id");
     require_once 'views/locations.php';
-//
-//    echo "</table>
-//<p>You currently have a total of <b>$numservers</b> Servers.</p>";
-    require_once 'views/locations.php';
+}
+
+function switches($vars) {
+    $modulelink = $vars['modulelink'];
+    $res = mysql_query("select * from mod_dsma_switches left join mod_dsma_locations on (mod_dsma_switches.location_id=mod_dsma_locations.location_id) left join tblclients on (mod_dsma_switches.client_id=tblclients.id) left join mod_dsma_rack on (mod_dsma_switches.rack_id=mod_dsma_rack.rack_id)order by switch_id");
+    require_once 'views/switches.php';
 }
 
 function add_server($vars) {
@@ -248,4 +242,53 @@ function update_edit_location() {
 
     $query = full_query("UPDATE mod_dsma_locations SET location_name = '$location', location_address = '$address' WHERE location_id =$locationid");
     header('Location: /theboss/addonmodules.php?module=dsma&action=locations');
+}
+
+function add_switch($vars) {
+    $modulelink = $vars['modulelink'];
+    if (isset($_POST['save'])) {
+		$clientID = $_POST['client_id'];
+		$locationID = $_POST['location_id'];
+		$rackID = $_POST['rack_id'];
+        $switchname = $_POST['switch_name'];
+        $switchports = $_POST['switch_ports'];
+        
+        unset($_POST['token']);
+        if (mysql_num_rows($res) == 0) {
+            $query = full_query("INSERT INTO mod_dsma_switches (client_id,location_id,rack_id,switch_name,switch_ports) " . " VALUES ('" . $clientID . "', '" . $locationID . "', '" . $rackID . "', '" . $switchname . "', '" . $switchports . "')");
+            header('Location: /theboss/addonmodules.php?module=dsma&action=switches');
+        } else {
+            $query = "";
+        }
+    }
+
+    require_once 'views/add_switch.php';
+}
+
+function switch_delete() {
+    $id = $_GET['switch_id'];
+    $del = full_query("DELETE FROM mod_dsma_switches where switch_id= $id");
+    header('Location: /theboss/addonmodules.php?module=dsma&action=switches');
+}
+
+function edit_switch($vars) {
+    $id = $_GET['switch_id'];
+    $query = full_query("SELECT * FROM mod_dsma_switches WHERE switch_id='$id' ");
+    $results = mysql_fetch_assoc($query);
+    $modulelink = $vars['modulelink'];
+    require_once 'views/edit_switch.php';
+}
+
+function update_edit_switch() {
+//    debug($_POST);
+//    die();
+		$clientID = $_POST['client_id'];
+		$locationID = $_POST['location_id'];
+		$rackID = $_POST['rack_id'];
+        $switchname = $_POST['switch_name'];
+        $switchports = $_POST['switch_ports'];
+
+
+    $query = full_query("UPDATE mod_dsma_switches SET client_id = '$clientID', location_id = '$locationID', rack_ID = '$rackID', switch_name = '$switchname', switch_ports = '$switchports' WHERE location_id =$id");
+    header('Location: /theboss/addonmodules.php?module=dsma&action=switches');
 }

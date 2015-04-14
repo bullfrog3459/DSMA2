@@ -1,7 +1,6 @@
-<p><a class="btn btn-primary" href="<?php echo $modulelink; ?>">Server List</a>
+<p><a class="btn btn-primary" href="<?php echo $modulelink ; ?>">Server List</a>
 <p>Please use the following form to add a new server.</p>
 <form class="form-horizontal" action="<?php echo $modulelink . '&action=add_server'; ?>" method="post">
-    <input type="hidden" name="save">
     <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
@@ -39,7 +38,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+		<div class="col-lg-6">
             <div class="form-group">
                 <label for="multiple_nics" class="col-sm-4 control-label">Multiple NICS:</label>
                 <div class="col-sm-8">
@@ -53,7 +52,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+		<div class="col-lg-6">
             <div class="form-group">
                 <label for="location" class="col-sm-4 control-label">Location:</label>
                 <div class="col-sm-8">
@@ -67,7 +66,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+		<div class="col-lg-6">
             <div class="form-group">
                 <label for="username" class="col-sm-4 control-label">Username:</label>
                 <div class="col-sm-8">
@@ -81,7 +80,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+		<div class="col-lg-6">
             <div class="form-group">
                 <label for="ssh_port" class="col-sm-4 control-label">SSH Port:</label>
                 <div class="col-sm-8">
@@ -95,7 +94,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+		<div class="col-lg-6">
             <div class="form-group">
                 <label for="control_panel" class="col-sm-4 control-label">Control Panel:</label>
                 <div class="col-sm-8">
@@ -109,7 +108,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+		<div class="col-lg-6">
             <div class="form-group">
                 <label for="cpu_cache" class="col-sm-4 control-label">CPU Cache:</label>
                 <div class="col-sm-8">
@@ -123,7 +122,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+		<div class="col-lg-6">
             <div class="form-group">
                 <label for="ram" class="col-sm-4 control-label">RAM:</label>
                 <div class="col-sm-8">
@@ -137,7 +136,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+		<div class="col-lg-6">
             <div class="form-group">
                 <label for="bandwidth" class="col-sm-4 control-label">Bandwidth:</label>
                 <div class="col-sm-8">
@@ -151,7 +150,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+		<div class="col-lg-6">
             <div class="form-group">
                 <label for="hd0" class="col-sm-4 control-label">Primary Drive:</label>
                 <div class="col-sm-8">
@@ -165,7 +164,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+		<div class="col-lg-6">
             <div class="form-group">
                 <label for="hd2" class="col-sm-4 control-label">Tertiary Drive:</label>
                 <div class="col-sm-8">
@@ -179,7 +178,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+		<div class="col-lg-6">
             <div class="form-group">
                 <label for="drive_raid" class="col-sm-4 control-label">Drive RAID:</label>
                 <div class="col-sm-8">
@@ -193,7 +192,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+		<div class="col-lg-6">
             <div class="form-group">
                 <label for="chassis_brand" class="col-sm-4 control-label">Chassis Brand:</label>
                 <div class="col-sm-8">
@@ -207,7 +206,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+		<div class="col-lg-6">
             <div class="form-group">
                 <label for="service_tag" class="col-sm-4 control-label">Service Tag:</label>
                 <div class="col-sm-8">
@@ -221,7 +220,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+		<div class="col-lg-6">
             <div class="form-group">
                 <label for="warranty_expiration" class="col-sm-4 control-label">Warranty Expiration:</label>
                 <div class="col-sm-8">
@@ -235,7 +234,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+		<div class="col-lg-6">
             <div class="form-group">
                 <label for="vps" class="col-sm-4 control-label">VPS:</label>
                 <div class="col-sm-8">
@@ -249,7 +248,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+		<div class="col-lg-6">
             <div class="form-group">
                 <label for="switch" class="col-sm-4 control-label">Switch:</label>
                 <div class="col-sm-8">
@@ -261,52 +260,52 @@
                 <div class="col-sm-8">
                     <input type=text name="switch_port" class="form-control"/>
                 </div>
-            </div>                                                                                      
+            </div>
         </div>
-        <div class="col-lg-6">
+		<div class="col-lg-6">
             <div class="form-group">
                 <label for="rack_name_number" class="col-sm-4 control-label">Rack Name/Number:</label>
                 <div class="col-sm-8">
                     <input type=text name="rack_name_number" class="form-control"/>
                 </div>
             </div>
-            <div class="form-group">
+			<div class="form-group">
                 <label for="rack_position" class="col-sm-4 control-label">Rack Position:</label>
                 <div class="col-sm-8">
                     <input type=text name="rack_position" class="form-control"/>
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
-
+		<div class="col-lg-6">
+            
             <div class="form-group">
                 <label for="ups" class="col-sm-4 control-label">UPS:</label>
                 <div class="col-sm-8">
                     <input type=text name="ups" class="form-control"/>
                 </div>
             </div>
-            <div class="form-group">
+			<div class="form-group">
                 <label for="ups_port" class="col-sm-4 control-label">UPS Port:</label>
                 <div class="col-sm-8">
                     <input type=text name="ups_port" class="form-control"/>
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+		<div class="col-lg-6">
             <div class="form-group">
                 <label for="pdu" class="col-sm-4 control-label">PDU:</label>
                 <div class="col-sm-8">
                     <input type=text name="pdu" class="form-control"/>
                 </div>
             </div>
-            <div class="form-group">
+			<div class="form-group">
                 <label for="pdu_port" class="col-sm-4 control-label">PDU Port:</label>
                 <div class="col-sm-8">
                     <input type=text name="pdu_port" class="form-control"/>
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+		<div class="col-lg-6">
             <div class="form-group">
                 <label for="notes" class="col-sm-4 control-label">Notes:</label>
                 <div class="col-sm-8">
@@ -315,5 +314,5 @@
             </div>
         </div>
     </div>
-    <input type="submit" value="Add Server" class="btn btn-primary"/>
+	<input type="submit" value="Add Server" class="btn btn-primary"/>
 </form>

@@ -15,6 +15,7 @@ function rack($vars) {
 function locations($vars) {
     $modulelink = $vars['modulelink'];
     $res = mysql_query("select * from mod_dsma_locations order by location_id");
+	$res2 = mysql_query("select * from mod_dsma_racks where location_id = '$rows[location_id]'");
     require_once 'views/locations.php';
 }
 

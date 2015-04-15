@@ -19,12 +19,17 @@
             <?php
 			
             $numservers = mysql_num_rows($res);
+			$numrack = mysql_num_rows($res2);
             while ($rows = mysql_fetch_array($res)) {
                 ?>
                 <tr>
                     <td><?php echo $rows[location_name]; ?></td>
                     <td><?php echo $rows[location_address]; ?></td>
-                    <td></td>
+                    <td><?php 
+					
+					echo $numrack;
+					
+					?></td>
                     <td>
                         <?php echo '<a href = "addonmodules.php?module=dsma&action=edit_location&location_id=' . $rows[location_id] . '" class = "some other classes"><i class = "fa fa-fw fa-pencil"></i></a>
 <a href = "addonmodules.php?module=dsma&location_id=' . $rows[location_id] . '&action=location_delete" class = "some other classes"><i class = "fa fa-fw fa-trash-o"></i></a>'

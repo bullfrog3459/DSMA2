@@ -24,6 +24,12 @@ function switches($vars) {
     require_once 'views/switches.php';
 }
 
+function allocations($vars) {
+    $modulelink = $vars['modulelink'];
+    $res = mysql_query("select * from mod_dsma_allocations left join mod_dsma on (mod_dsma_allocations.server_id=mod_dsma.server_id) order by allocation_id");
+    require_once 'views/allocations.php';
+}
+
 function add_server($vars) {
     $modulelink = $vars['modulelink'];
     if (isset($_POST['save'])) {
@@ -291,4 +297,49 @@ function update_edit_switch() {
 
     $query = full_query("UPDATE mod_dsma_switches SET client_id = '$clientID', location_id = '$locationID', rack_ID = '$rackID', switch_name = '$switchname', switch_ports = '$switchports' WHERE location_id =$id");
     header('Location: /theboss/addonmodules.php?module=dsma&action=switches');
+}
+
+function add_allocation($vars) {
+    $modulelink = $vars['modulelink'];
+    if (isset($_POST['save'])) {
+		$serverID = $_POST['server_id'];
+		$ip = $_POST['ip'];
+        $subnet = $_POST['subnet'];
+        
+        unset($_POST['token']);
+        if (mysql_num_rows($res) == 0) {
+            $query = full_query("INSERT INTO mod_dsma_allocations (server_id, ip, subnet) " . " VALUES ('" . $serverID . "', '" . $ip . "', '" . $subnet . "')");
+            header('Location: /theboss/addonmodules.php?module=dsma&action=allocations');
+        } else {
+            $query = "";
+        }
+    }
+
+    require_once 'views/add_allocation.php';
+}
+
+function allocation_delete() {
+    $id = $_GET['allocation_id'];
+    $del = full_query("DELETE FROM mod_dsma_allocations where allocation_id= $id");
+    header('Location: /theboss/addonmodules.php?module=dsma&action=allocations');
+}
+
+function edit_allocation($vars) {
+    $id = $_GET['allocation_id'];
+    $query = full_query("SELECT * FROM mod_dsma_allocations WHERE allocation_id='$id' ");
+    $results = mysql_fetch_assoc($query);
+    $modulelink = $vars['modulelink'];
+    require_once 'views/edit_allocation.php';
+}
+
+function update_edit_allocation() {
+//    debug($_POST);
+//    die();
+		$serverID = $_POST['server_id'];
+		$ips = $_POST['ip'];
+        $subnets = $_POST['subnet'];
+
+
+    $query = full_query("UPDATE mod_dsma_allocations SET server_id = '$serverID', ip = '$ips', subnet = '$subnets' WHERE allocation_id =$id");
+    header('Location: /theboss/addonmodules.php?module=dsma&action=allocations');
 }

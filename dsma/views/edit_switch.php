@@ -84,6 +84,12 @@
                     </select>
                 </div>
 			</div>
+			<div class="form-group">
+                <label for="switch_snmp" class="col-sm-4 control-label">SNMP Community:</label>
+                <div class="col-sm-8">
+                    <input type=text name="switch_snmp" value="<?php echo $results['switch_snmp']; ?>" class="form-control"/>
+                </div>
+            </div>
         </div>
 	</div>
     <input type="submit" value="Edit Switch" class="btn btn-primary"/>

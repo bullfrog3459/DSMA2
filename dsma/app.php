@@ -334,13 +334,13 @@ function edit_allocation($vars) {
 }
 
 function update_edit_allocation() {
-//    debug($_POST);
-//    die();
+    //debug($_POST);
+    //die();
+		$allocationid = $_POST['id'];
+		$ip = $_POST['ip'];
+        $subnet = $_POST['subnet'];
 		$serverID = $_POST['server_id'];
-		$ips = $_POST['ip'];
-        $subnets = $_POST['subnet'];
 
-
-    $query = full_query("UPDATE mod_dsma_allocations SET server_id = '$serverID', ip = '$ips', subnet = '$subnets' WHERE allocation_id =$id");
+    $query = full_query("UPDATE mod_dsma_allocations SET server_id = '$serverID', ip = '$ip', subnet = '$subnet' WHERE allocation_id =$allocationid");
     header('Location: /theboss/addonmodules.php?module=dsma&action=allocations');
 }

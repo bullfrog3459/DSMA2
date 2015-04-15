@@ -3,16 +3,13 @@
 //?>
 <p><a class="btn btn-primary" href="<?php echo $modulelink . '&action=allocations'; ?>">Allocations</a>
 <form class="form-horizontal"  action="<?php echo $modulelink . '&action=update_edit_allocation'; ?>" method="post">
-    <input type="hidden" name="id" value="<?php echo $results['allocation_id'] ?>" class="form-control" id="id" placeholder="">
+    <input type="hidden" name="id" value="<?php echo $results['allocation_id'] ?>" class="form-control" id="allocation_id" placeholder="">
     <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="ip" class="col-sm-4 control-label">Version:</label>
                 <div class="col-sm-8">
-                    <select name="ip" class="form-control">
-                        <option value="IPv4">IPv4</option>
-						<option value="IPv6">IPv6</option>
-                    </select>
+				<input type=text name="ip" value="<?php echo $results['ip']; ?>" class="form-control" readonly="readonly"/>
                 </div>
             </div>
         </div>
@@ -20,7 +17,7 @@
             <div class="form-group">
                 <label for="subnet" class="col-sm-4 control-label">Subnet:</label>
                 <div class="col-sm-8">
-                    <input type=text name="subnet" value="<?php echo $results['subnet']; ?>" class="form-control"/>
+                    <input type=text name="subnet" value="<?php echo $results['subnet']; ?>" class="form-control" readonly="readonly"/>
                 </div>
             </div>
         </div>

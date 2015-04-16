@@ -1,6 +1,4 @@
 <link href="<?php echo $vars['moduledir'] ?>css/font-awesome.min.css" type="text/css" rel="stylesheet"/>
-<link href="<?php echo $vars['moduledir'] ?>css/ionicons.min.css" type="text/css" rel="stylesheet"/>
-<link href="<?php echo $vars['moduledir'] ?>css/icon.css" type="text/css" rel="stylesheet"/>
 <div id="box-header seperator ds_manage_main">
     <p>
         <a class="btn btn-primary" href="<?php echo $modulelink; ?>">Server List</a>
@@ -29,7 +27,7 @@
             while ($rows = mysql_fetch_array($res)) {
                 ?>
                 <tr>
-                    <td><?php echo "<a href=$modulelink&page=server_details&server_id=" . $rows[server_id] . ">" . $rows[server_name] . "</a>"; ?></td>
+                    <td><?php echo "<a href=$modulelink&action=edit_server&server_id=" . $rows[server_id] . ">" . $rows[server_name] . "</a>"; ?></td>
                     <td><?php echo $rows[location]; ?></td>
                     <td><?php echo $rows[main_ip_address]; ?></td>
                     <td><?php echo "<a href=clientssummary.php?userid=" . $rows[client_id] . ">" . $rows[firstname] . " " . $rows[lastname] . "</a>"; ?></td>
@@ -41,8 +39,9 @@
                     <td><?php echo $rows[bandwidth]; ?></td>
                     <td><?php echo $rows[control_panel]; ?></td>
                     <td>
-                        <?php echo '<a href = "addonmodules.php?module=dsma&action=edit_server&server_id=' . $rows[server_id] . '" class = "some other classes"><i class = "fa fa-fw fa-pencil"></i></a>
-<a href = "addonmodules.php?module=dsma&server_id=' . $rows[server_id] . '&action=server_delete" class = "some other classes"><i class = "fa fa-fw fa-trash-o"></i></a>'
+                        <?php
+                        echo '<a href = "addonmodules.php?module=dsma&action=edit_server&server_id=' . $rows[server_id] . '" class = "some other classes"><i class = "fa fa-fw fa-pencil"></i></a>
+<a href = "addonmodules.php?module=dsma&server_id=' . $rows[server_id] . '&client_id=' . $rows[client_id] . '&action=server_delete" class = "some other classes" data-confirm="Are you sure to delete this item?"><i class = "fa fa-fw fa-trash-o"></i></a>'
                         ?></td>
                 </tr>
                 <?php

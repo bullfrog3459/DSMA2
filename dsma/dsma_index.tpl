@@ -16,6 +16,11 @@
         </tr>
     </thead>
     <tbody>
+		{if ($servers) == 0}
+		<tr>
+			<td colspan="7">No Servers Found.</td>
+		</tr>
+		{else}
         {foreach from=$servers item=server}   
             <tr>
                 <td>{$server.nickname}</td>
@@ -27,7 +32,8 @@
                 <td class="textcenter"><a class="btn btn-primary" href="{$vars.modulelink}&action=edit&server_id={$server.server_id}">Edit</a></td>
             </tr>
         {/foreach}
-
+		{/if}
+		
     </tbody>
 </table>
 <div class="pagination">

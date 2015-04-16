@@ -81,7 +81,7 @@ function add_server($vars) {
         if (mysql_num_rows($res) == 0) {
             $query = full_query("INSERT INTO mod_dsma (client_id,main_ip_address,server_name,additional_ip_addresses,multiple_nics,drac_ip,location,os,root_username,root_pass,ssh_port,rdc_port,control_panel,cpu,cpu_cache,cpu_ghz,ram,ram_speed,bandwidth,drive_controller,hd0,hd1,hd2,hd3,drive_raid,chassis_brand,chassis_model,service_tag,asset_tag,warranty_expiration,managed,vps,vps_node,switch_id,switch_port,rack_name_number,rack_position,ups,ups_port,pdu_id,pdu_port,server_notes,nickname,clients_notes) " . " VALUES ('" . $clientID . "', '" . $mainip_add . "', '" . $servername . "', '" . $addip_add . "', '" . $multiple_nics . "', '" . $dracip . "', '" . $location . "', '" . $os . "', '" . $root_username . "', '" . $root_pass . "', '" . $sshport . "', '" . $rdcport . "', '" . $controlpanel . "', '" . $cpu . "', '" . $cpucache . "', '" . $cpuspeed . "', '" . $ram . "', '" . $ramspeed . "', '" . $bandwidht . "', '" . $drivecon . "', '" . $hd0 . "', '" . $hd1 . "', '" . $hd2 . "', '" . $hd3 . "', '" . $driveraid . "', '" . $chassisbrand . "', '" . $chassisemodel . "', '" . $servicetag . "', '" . $assettag . "', '" . $warranty_exp . "', '" . $managed . "', '" . $vps . "', '" . $vpsnode . "', '" . $switch . "', '" . $switch_port . "', '" . $rack_no . "', '" . $rack_position . "', '" . $ups . "', '" . $ups_port . "', '" . $pdu . "', '" . $pdu_port . "', '" . $notes . "', '" . $nickname . "', '" . $client_notes . "')");
             $_SESSION['successmsg'] = "Add Successfully";
-            header('Location: /whmcs_d/admin/addonmodules.php?module=dsma');
+            header('location:' . $vars['modulelink']);
         } else {
             $query = "";
         }
@@ -100,7 +100,7 @@ function edit_server($vars) {
     require_once 'views/edit_server.php';
 }
 
-function update_edit_server() {
+function update_edit_server($vars) {
     $modulelink = $vars['modulelink'];
     $serverid = $_POST['id'];
     $clientID = $_POST['client_id'];
@@ -156,10 +156,11 @@ function update_edit_server() {
      multiple_psus='$multiplepsus',service_tag='$servicetag',asset_tag='$assettag',warranty_expiration='$warranty_exp',managed='$managed',vps='$vps',vps_node='$vpsnode',switch_id='$switch',
      switch_port='$switch_port',rack_name_number='$rack_no',rack_position='$rack_position',ups='$ups',ups_port='$ups_port',pdu_id='$pdu',pdu_port='$pdu_port',server_notes='$notes',nickname='$nickname',clients_notes='$client_notes' WHERE server_id =$serverid");
     $_SESSION['successmsg'] = "Edit Successfully";
-    header('location:' . $vars['modulelink'] . 'addonmodules.php?module=dsma');
+    header('location:' . $vars['modulelink']);
 }
 
-function server_delete() {
+function server_delete($vars) {
+	$modulelink = $vars['modulelink'];
     $id = $_GET['server_id'];
     $client_id = $_GET['client_id'];
 //    debug($id);
@@ -169,9 +170,9 @@ function server_delete() {
         $sql = full_query("DELETE FROM mod_dsma WHERE server_id='" . ($id) . "'" .
                 " AND client_id='" . ($client_id) . "'");
         $_SESSION['successmsg'] = "Delete Successfully";
-        header('location:' . $vars['modulelink'] . 'addonmodules.php?module=dsma');
+        header('location:' . $vars['modulelink']);
     } else {
         $_SESSION['errormsg'] = "Record Not Deleted";
-        header('location:' . $vars['modulelink'] . 'addonmodules.php?module=dsma');
+        header('location:' . $vars['modulelink']);
     }
 }

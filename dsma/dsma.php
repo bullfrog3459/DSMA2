@@ -19,51 +19,53 @@ function dsma_activate() {
     $query = "CREATE TABLE `mod_dsma` (
   `server_id` int(1) NOT NULL AUTO_INCREMENT,
   `client_id` int(11) NOT NULL,
-  `server_name` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `main_ip_address` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `additional_ip_addresses` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `multiple_nics` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `drac_ip` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `location` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `os` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `root_username` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `root_pass` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `ssh_port` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `rdc_port` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `control_panel` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `cpu` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `cpu_cache` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `cpu_ghz` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `ram` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `bandwidth` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `ram_speed` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `drive_controller` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `hd0` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `hd1` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `hd2` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `hd3` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `drive_raid` varchar(5) CHARACTER SET utf8 NOT NULL,
-  `multiple_psus` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `chassis_brand` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `chassis_model` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `service_tag` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `asset_tag` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `warranty_expiration` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `managed` varchar(10) CHARACTER SET utf8 NOT NULL,
-  `vps` varchar(5) CHARACTER SET utf8 NOT NULL,
-  `vps_node` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `switch_id` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `switch_port` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `switch_speed` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `rack_name_number` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `rack_position` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `ups` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `ups_port` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `pdu_id` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `pdu_port` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `contract_terms` text CHARACTER SET utf8 NOT NULL,
-  `server_notes` text CHARACTER SET utf8 NOT NULL,
+  `server_name` varchar(255) CHARACTER SET utf8 NULL,
+  `main_ip_address` varchar(255) CHARACTER SET utf8 NULL,
+  `additional_ip_addresses` varchar(255) CHARACTER SET utf8 NULL,
+  `multiple_nics` varchar(255) CHARACTER SET utf8 NULL,
+  `drac_ip` varchar(255) CHARACTER SET utf8 NULL,
+  `location` varchar(255) CHARACTER SET utf8 NULL,
+  `os` varchar(255) CHARACTER SET utf8 NULL,
+  `root_username` varchar(255) CHARACTER SET utf8 NULL,
+  `root_pass` varchar(255) CHARACTER SET utf8 NULL,
+  `ssh_port` varchar(255) CHARACTER SET utf8 NULL,
+  `rdc_port` varchar(255) CHARACTER SET utf8 NULL,
+  `control_panel` varchar(255) CHARACTER SET utf8 NULL,
+  `cpu` varchar(255) CHARACTER SET utf8 NULL,
+  `cpu_cache` varchar(255) CHARACTER SET utf8 NULL,
+  `cpu_ghz` varchar(255) CHARACTER SET utf8 NULL,
+  `ram` varchar(255) CHARACTER SET utf8 NULL,
+  `bandwidth` varchar(255) CHARACTER SET utf8 NULL,
+  `ram_speed` varchar(255) CHARACTER SET utf8 NULL,
+  `drive_controller` varchar(255) CHARACTER SET utf8 NULL,
+  `hd0` varchar(255) CHARACTER SET utf8 NULL,
+  `hd1` varchar(255) CHARACTER SET utf8 NULL,
+  `hd2` varchar(255) CHARACTER SET utf8 NULL,
+  `hd3` varchar(255) CHARACTER SET utf8 NULL,
+  `drive_raid` varchar(5) CHARACTER SET utf8 NULL,
+  `multiple_psus` varchar(255) CHARACTER SET utf8 NULL,
+  `chassis_brand` varchar(255) CHARACTER SET utf8 NULL,
+  `chassis_model` varchar(255) CHARACTER SET utf8 NULL,
+  `service_tag` varchar(255) CHARACTER SET utf8 NULL,
+  `asset_tag` varchar(255) CHARACTER SET utf8 NULL,
+  `warranty_expiration` varchar(255) CHARACTER SET utf8 NULL,
+  `managed` varchar(10) CHARACTER SET utf8 NULL,
+  `vps` varchar(5) CHARACTER SET utf8 NULL,
+  `vps_node` varchar(255) CHARACTER SET utf8 NULL,
+  `switch_id` varchar(255) CHARACTER SET utf8 NULL,
+  `switch_port` varchar(255) CHARACTER SET utf8 NULL,
+  `switch_speed` varchar(255) CHARACTER SET utf8 NULL,
+  `rack_name_number` varchar(255) CHARACTER SET utf8 NULL,
+  `rack_position` varchar(255) CHARACTER SET utf8 NULL,
+  `ups` varchar(255) CHARACTER SET utf8 NULL,
+  `ups_port` varchar(255) CHARACTER SET utf8 NULL,
+  `pdu_id` varchar(255) CHARACTER SET utf8 NULL,
+  `pdu_port` varchar(255) CHARACTER SET utf8 NULL,
+  `contract_terms` text CHARACTER SET utf8 NULL,
+  `server_notes` text CHARACTER SET utf8 NULL,
   `product_id` int(11) NOT NULL,
+  `nickname` varchar(255) CHARACTER SET utf8 NULL,
+  `clients_notes` text CHARACTER SET utf8 NULL
   PRIMARY KEY (`server_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8";
     $result = full_query($query);
@@ -112,6 +114,46 @@ function dsma_header($vars) {
                 $action = 'index';
             }
             return $action;
+        }
+
+        function dsma_clientarea($vars) {
+            $vars['moduledir'] = 'modules/addons/dsma/';
+            $servers = '';
+            $message = false;
+            $templatefile = "dsma_index";
+            if ($_GET['action'] == "edit") {
+                if (isset($_POST['id'])) {
+                    $_SESSION['successmessage'] = "Server updated successfuly";
+                    update_query('mod_dsma', array('nickname' => $_POST['nickname'], 'clients_notes' => $_POST['clients_notes']), array('server_id' => $_POST['id']));
+                    header('location:' . $vars['modulelink']);
+                } else if (isset($_GET['server_id'])) {
+                    $servers = get_query_vals('mod_dsma', '*', array('server_id' => $_GET['server_id']));
+                    $templatefile = "dsma_edit";
+                }
+            } else {
+                if (isset($_SESSION['uid'])) {
+                    $getuserservers = full_query("SELECT * FROM mod_dsma where client_id='" . $_SESSION['uid'] . "'");
+                    while ($row = mysql_fetch_assoc($getuserservers)) {
+                        $servers[] = $row;
+                    }
+                }
+            }
+            if (isset($_SESSION['successmessage'])) {
+                $message = $_SESSION['successmessage'];
+                unset($_SESSION['successmessage']);
+            }
+            return array(
+                'pagetitle' => 'DSMA',
+                'breadcrumb' => array('index.php?m=dsma' => 'DSMA'),
+                'templatefile' => $templatefile,
+                'requirelogin' => true, # or false
+                'vars' => array(
+                    'content' => '',
+                    'vars' => $vars,
+                    'errormessage' => $message,
+                    'servers' => $servers
+                ),
+            );
         }
 
 //function dsma_sidebar($vars) {

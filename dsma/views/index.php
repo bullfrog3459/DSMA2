@@ -9,6 +9,7 @@
 		<a class="btn btn-primary" href="<?php echo $modulelink . '&action=switches'; ?>">Switches</a>
 		<a class="btn btn-primary" href="<?php echo $modulelink . '&action=locations'; ?>">Locations</a>
 		<a class="btn btn-primary" href="<?php echo $modulelink . '&action=allocations'; ?>">Allocations</a>
+		<a class="btn btn-primary" href="<?php echo $modulelink . '&action=shipments'; ?>">Shipments</a>
     <p>Below is a list of the currently available servers. Please click on server name to get the server details.</p>
     <table class="table table-bordered table-striped" width=100% cellspacing=0 cellpadding=5>
         <thead>

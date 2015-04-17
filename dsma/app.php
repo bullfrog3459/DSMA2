@@ -31,6 +31,18 @@ function allocations($vars) {
     require_once 'views/allocations.php';
 }
 
+function shipments($vars) {
+    $modulelink = $vars['modulelink'];
+    $res = mysql_query("select * from mod_dsma_shipping left join mod_dsma_locations on (mod_dsma_shipping.location_id=mod_dsma_locations.location_id) left join tblclients on (mod_dsma_shipping.client_id=tblclients.id) where `received` = '0' order by tracking_id");
+    require_once 'views/shipments.php';
+}
+
+function shipments_received($vars) {
+    $modulelink = $vars['modulelink'];
+    $res = mysql_query("select * from mod_dsma_shipping left join mod_dsma_locations on (mod_dsma_shipping.location_id=mod_dsma_locations.location_id) left join tblclients on (mod_dsma_shipping.client_id=tblclients.id) where `received` = '1' order by tracking_id");
+    require_once 'views/shipments_received.php';
+}
+
 function add_server($vars) {
     $modulelink = $vars['modulelink'];
     if (isset($_POST['save'])) {
@@ -343,4 +355,69 @@ function update_edit_allocation() {
 
     $query = full_query("UPDATE mod_dsma_allocations SET server_id = '$serverID', ip = '$ip', subnet = '$subnet' WHERE allocation_id =$allocationid");
     header('Location: /theboss/addonmodules.php?module=dsma&action=allocations');
+}
+
+function shipment_delete() {
+    $id = $_GET['tracking_id'];
+    $del = full_query("DELETE FROM mod_dsma_shipping where tracking_id= $id");
+    header('Location: /theboss/addonmodules.php?module=dsma&action=shipments');
+}
+
+function edit_shipment($vars) {
+    $id = $_GET['tracking_id'];
+    $query = full_query("SELECT * FROM mod_dsma_shipping WHERE tracking_id='$id' ");
+    $results = mysql_fetch_assoc($query);
+    $modulelink = $vars['modulelink'];
+    require_once 'views/edit_shipment.php';
+}
+
+function update_edit_shipment() {
+    //debug($_POST);
+    //die();
+		$trackingID = $_POST['id'];
+		$clientID = $_POST['client_id'];
+        $locationID = $_POST['location_id'];
+		$tracking = $_POST['tracking_number'];
+		$shipper = $_POST['shipper'];
+		$shipdate = $_POST['ship_date'];
+		$shiprec = $_POST['ship_receive'];
+		$rec = $_POST['received'];
+		
+
+    $query = full_query("UPDATE mod_dsma_shipping SET client_id = '$clientID', location_id = '$locationID', tracking_number = '$tracking', shipper = '$shipper', ship_date = '$shipdate', ship_receive = '$shiprec', received = '$rec' WHERE tracking_id =$trackingid");
+    header('Location: /theboss/addonmodules.php?module=dsma&action=shipments');
+}
+
+function shipment_received() {
+    //debug($_POST);
+    //die();
+		$id = $_GET['tracking_id'];
+		
+
+    $received = full_query("UPDATE mod_dsma_shipping SET received = '1' WHERE tracking_id =$id");
+    header('Location: /theboss/addonmodules.php?module=dsma&action=shipments');
+}
+
+function add_shipment($vars) {
+    $modulelink = $vars['modulelink'];
+    if (isset($_POST['save'])) {
+		$clientID = $_POST['client_id'];
+        $locationID = $_POST['location_id'];
+		$tracking = $_POST['tracking_number'];
+		$shipper = $_POST['shipper'];
+		$shipdate = $_POST['ship_date'];
+		$shiprec = $_POST['ship_receive'];
+		$rec = $_POST['received'];
+        
+        unset($_POST['token']);
+        if (mysql_num_rows($res) == 0) {
+            $query = full_query("INSERT INTO mod_dsma_shipping (client_id, location_id, tracking_number, shipper, ship_date, ship_receive, received) " . " VALUES ('" . $clientID . "', '" . $locationID . "', '" . $tracking . "', '" . $shipper . "', '" . $shipdate . "', '" . $shiprec . "', '" . $rec . "')");
+            header('Location: /theboss/addonmodules.php?module=dsma&action=shipments');
+        } else {
+            $query = "";
+        }
+    }
+
+
+    require_once 'views/add_shipment.php';
 }

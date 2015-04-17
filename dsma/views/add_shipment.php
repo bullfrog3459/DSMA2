@@ -1,9 +1,5 @@
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
-<script type="test/javascript" src="<?php echo $vars['moduledir'] ?>js/bootstrap.js"></script>
-<script type="test/javascript" src="<?php echo $vars['moduledir'] ?>js/bootstrap-datetimepicker.js"></script>
-<link href="<?php echo $vars['moduledir'] ?>css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet"/>
-<p><a class="btn btn-primary" href="<?php echo $modulelink . '&action=shipment'; ?>">Shipments</a>
+<link rel="stylesheet" type="text/css" href="<?php echo $vars['moduledir'] ?>css/jquery.datetimepicker.css"/>
+<p><a class="btn btn-primary" href="<?php echo $modulelink . '&action=shipments'; ?>">Shipments</a>
 <form class="form-horizontal" action="<?php echo $modulelink . '&action=add_shipment'; ?>" method="post">
     <input type="hidden" name="save">
     <div class="row">
@@ -48,11 +44,11 @@
                 <label for="shipper" class="col-sm-4 control-label">Shipper:</label>
                 <div class="col-sm-8">
                     <select name="shipper" class="form-control">
-                        <option value="0">UPS</option>
-						<option value="1">FedEx</option>
-						<option value="2">DHL</option>
-						<option value="3">USPS</option>
-						<option value="4">Other</option>
+                        <option value="UPS">UPS</option>
+						<option value="FedEx">FedEx</option>
+						<option value="DHL">DHL</option>
+						<option value="USPS">USPS</option>
+						<option value="Other">Other</option>
                     </select>
                 </div>
             </div>
@@ -61,53 +57,21 @@
             <div class="form-group">
                 <label for="ship_date" class="col-sm-4 control-label">Ship Date:</label>
                 <div class="col-sm-8">
-                    <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control" />
-                    <span class="input-group-addon">
-                        <span class="fa fa-fw fa-calendar-o"></span>
-                    </span>
-                </div>
-				<script type="text/javascript">
-					$(function () {
-					$('#datetimepicker1').datetimepicker(
-					icons: {
-                    time: "fa fa-clock-o",
-                    date: "fa fa-calendar",
-                    up: "fa fa-arrow-up",
-                    down: "fa fa-arrow-down"
-						});
-					});
-				</script>
+				<input type="text" id="datetimepicker1" class="form-control" name="ship_date"/><br><br>
                 </div>
             </div>
 			<div class="form-group">
                 <label for="ship_receive" class="col-sm-4 control-label">Ship Receive:</label>
                 <div class="col-sm-8">
-                    <div class='input-group date' id='datetimepicker2'>
-                    <input type='text' class="form-control" />
-                    <span class="input-group-addon">
-                        <span class="fa fa-fw fa-calendar-o"></span>
-                    </span>
-                </div>
-				<script type="text/javascript">
-					$(function () {
-					$('#datetimepicker2').datetimepicker({
-						icons: {
-                    time: "fa fa-clock-o",
-                    date: "fa fa-calendar",
-                    up: "fa fa-arrow-up",
-                    down: "fa fa-arrow-down"
-						});
-					});
-				</script>
-                </div>
-            </div>
-        </div>
+				<input type="text" id="datetimepicker2" class="form-control" name="ship_receive"/><br><br>
+				</div>
+			</div>
+		</div>
 		<div class="col-lg-6">
             <div class="form-group">
                 <label for="received" class="col-sm-4 control-label">Received:</label>
                 <div class="col-sm-8">
-                    <select name="shipper" class="form-control">
+                    <select name="received" class="form-control">
                         <option value="0">No</option>
 						<option value="1">Yes</option>
                     </select>
@@ -117,3 +81,22 @@
 	</div>
     <input type="submit" value="Add Shipment" class="btn btn-primary"/>
 </form>
+
+<script src="<?php echo $vars['moduledir'] ?>js/jquery.js"></script>
+<script src="<?php echo $vars['moduledir'] ?>js/jquery.datetimepicker.js"></script>
+<script>
+$('#datetimepicker1').datetimepicker({
+	lang:'en',
+	timepicker:false,
+	format:'m/d/Y',
+	formatDate:'m/d/Y',
+	closeOnDateSelect: true
+});
+$('#datetimepicker2').datetimepicker({
+	lang:'en',
+	timepicker:false,
+	format:'m/d/Y',
+	formatDate:'m/d/Y',
+	closeOnDateSelect: true
+});
+</script>

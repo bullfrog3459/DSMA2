@@ -365,7 +365,7 @@ function shipment_delete() {
 
 function edit_shipment($vars) {
     $id = $_GET['tracking_id'];
-    $query = full_query("SELECT * FROM mod_dsma_shipping WHERE tracking_id='$id' ");
+    $query = full_query("SELECT * FROM mod_dsma_shipping WHERE tracking_id='$id'");
     $results = mysql_fetch_assoc($query);
     $modulelink = $vars['modulelink'];
     require_once 'views/edit_shipment.php';
@@ -384,7 +384,7 @@ function update_edit_shipment() {
 		$rec = $_POST['received'];
 		
 
-    $query = full_query("UPDATE mod_dsma_shipping SET client_id = '$clientID', location_id = '$locationID', tracking_number = '$tracking', shipper = '$shipper', ship_date = '$shipdate', ship_receive = '$shiprec', received = '$rec' WHERE tracking_id =$trackingid");
+    $query = full_query("UPDATE mod_dsma_shipping SET client_id = '$clientID', location_id = '$locationID', tracking_number = '$tracking', shipper = '$shipper', ship_date = '$shipdate', ship_receive = '$shiprec', received = '$rec' WHERE tracking_id =$trackingID");
     header('Location: /theboss/addonmodules.php?module=dsma&action=shipments');
 }
 
@@ -404,14 +404,14 @@ function add_shipment($vars) {
 		$clientID = $_POST['client_id'];
         $locationID = $_POST['location_id'];
 		$tracking = $_POST['tracking_number'];
-		$shipper = $_POST['shipper'];
+		$ship = $_POST['shipper'];
 		$shipdate = $_POST['ship_date'];
 		$shiprec = $_POST['ship_receive'];
 		$rec = $_POST['received'];
         
         unset($_POST['token']);
         if (mysql_num_rows($res) == 0) {
-            $query = full_query("INSERT INTO mod_dsma_shipping (client_id, location_id, tracking_number, shipper, ship_date, ship_receive, received) " . " VALUES ('" . $clientID . "', '" . $locationID . "', '" . $tracking . "', '" . $shipper . "', '" . $shipdate . "', '" . $shiprec . "', '" . $rec . "')");
+            $query = full_query("INSERT INTO mod_dsma_shipping (client_id, location_id, tracking_number, shipper, ship_date, ship_receive, received) " . " VALUES ('" . $clientID . "', '" . $locationID . "', '" . $tracking . "', '" . $ship . "', '" . $shipdate . "', '" . $shiprec . "', '" . $rec . "')");
             header('Location: /theboss/addonmodules.php?module=dsma&action=shipments');
         } else {
             $query = "";

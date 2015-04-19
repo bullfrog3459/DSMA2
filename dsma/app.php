@@ -130,6 +130,14 @@ function edit_server($vars) {
     require_once 'views/edit_server.php';
 }
 
+function view_server($vars) {
+    $id = $_GET['server_id'];
+    $query = full_query("SELECT *FROM mod_dsma WHERE server_id='$id' ");
+    $results = mysql_fetch_assoc($query);
+    $modulelink = $vars['modulelink'];
+    require_once 'views/view_server.php';
+}
+
 function update_edit_server($vars) {
 //    debug($_POST);
 //    die();

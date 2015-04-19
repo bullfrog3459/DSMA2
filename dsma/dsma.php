@@ -105,56 +105,58 @@ function dsma_header($vars) {
         <div class="panel-body">
 
             <?php
-        }
+}
 
-        function get_action() {
-            if (isset($_GET['action'])) {
-                $action = $_GET['action'];
-            } else {
-                $action = 'index';
-            }
+function get_action() {
+    if (isset($_GET['action'])) {
+        $action = $_GET['action'];
+        } else {
+            $action = 'index';
+        }
             return $action;
-        }
+}
 
-        function dsma_clientarea($vars) {
-            $vars['moduledir'] = 'modules/addons/dsma/';
-            $servers = '';
-            $message = false;
-            $templatefile = "dsma_index";
-            if ($_GET['action'] == "edit") {
-                if (isset($_POST['id'])) {
-                    $_SESSION['successmessage'] = "Server updated successfuly";
-                    update_query('mod_dsma', array('nickname' => $_POST['nickname'], 'clients_notes' => $_POST['clients_notes']), array('server_id' => $_POST['id']));
-                    header('location:' . $vars['modulelink']);
-                } else if (isset($_GET['server_id'])) {
-                    $servers = get_query_vals('mod_dsma', '*', array('server_id' => $_GET['server_id']));
-                    $templatefile = "dsma_edit";
-                }
-            } else {
-                if (isset($_SESSION['uid'])) {
-                    $getuserservers = full_query("SELECT * FROM mod_dsma where client_id='" . $_SESSION['uid'] . "'");
-                    while ($row = mysql_fetch_assoc($getuserservers)) {
-                        $servers[] = $row;
-                    }
-                }
+function dsma_clientarea($vars) {
+    $vars['moduledir'] = 'modules/addons/dsma/';
+    $servers = '';
+    $message = false;
+    $templatefile = "dsma_index";
+	
+    if ($_GET['action'] == "edit") {
+        if (isset($_POST['id'])) {
+        $_SESSION['successmessage'] = "Server updated successfuly";
+        update_query('mod_dsma', array('nickname' => $_POST['nickname'], 'clients_notes' => $_POST['clients_notes']), array('server_id' => $_POST['id']));
+        header('location:' . $vars['modulelink']);
+        } else if (isset($_GET['server_id'])) {
+            $servers = get_query_vals('mod_dsma', '*', array('server_id' => $_GET['server_id']));
+				$templatefile = "dsma_edit";
+        } 
+    } else {
+        if (isset($_SESSION['uid'])) {
+            $getuserservers = full_query("SELECT * FROM mod_dsma where client_id='" . $_SESSION['uid'] . "'");
+            while ($row = mysql_fetch_assoc($getuserservers)) {
+                $servers[] = $row;
             }
-            if (isset($_SESSION['successmessage'])) {
-                $message = $_SESSION['successmessage'];
-                unset($_SESSION['successmessage']);
-            }
-            return array(
-                'pagetitle' => 'DSMA',
-                'breadcrumb' => array('index.php?m=dsma' => 'DSMA'),
-                'templatefile' => $templatefile,
-                'requirelogin' => true, # or false
-                'vars' => array(
-                    'content' => '',
-                    'vars' => $vars,
-                    'errormessage' => $message,
-                    'servers' => $servers
-                ),
-            );
         }
+    }
+	
+      if (isset($_SESSION['successmessage'])) {
+        $message = $_SESSION['successmessage'];
+            unset($_SESSION['successmessage']);
+    }
+        return array(
+            'pagetitle' => 'DSMA',
+            'breadcrumb' => array('index.php?m=dsma' => 'DSMA'),
+            'templatefile' => $templatefile,
+            'requirelogin' => true, # or false
+            'vars' => array(
+                'content' => '',
+                'vars' => $vars,
+                'errormessage' => $message,
+                'servers' => $servers
+                ),
+        );
+}
 
 //function dsma_sidebar($vars) {
 //

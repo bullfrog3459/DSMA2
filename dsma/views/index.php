@@ -12,17 +12,12 @@
     <table class="table table-bordered table-striped" width=100% cellspacing=0 cellpadding=5>
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Location</th>
-                <th>Primary IP Address</th>
+                <th>Nickname</th>
+                <th>Device</th>
+                <th>Type</th>
                 <th>Owner</th>
-                <th>OS</th>
-                <th>Product</th>
-                <th>CPU</th>
-                <th>RAM</th>
-                <th>Primary Hard Drive</th>
-                <th>Bandwidth</th>
-                <th>Control Panel</th>
+				<th>Location</th>
+                <th>Rack</th>
                 <th align="center">Action</th>
             </tr>
         </thead>
@@ -32,17 +27,12 @@
             while ($rows = mysql_fetch_array($res)) {
                 ?>
                 <tr>
-                    <td><?php echo $rows[server_name]; ?></td>
-                    <td><?php echo $rows[location]; ?></td>
-                    <td><?php echo $rows[main_ip_address]; ?></td>
+                    <td><?php echo $rows[nickname]; ?></td>
+                    <td><?php echo "<a href =addonmodules.php?module=dsma&action=view_server&server_id=" . $rows[server_id] . ">" . $rows[server_name] ."</a>"; ?></td>
+                    <td><?php echo $rows[device_type]; ?></td>
                     <td><?php echo "<a href=clientssummary.php?userid=" . $rows[client_id] . ">" . $rows[firstname] . " " . $rows[lastname] . "</a>"; ?></td>
-                    <td><?php echo $rows[os]; ?></td>
-                    <td><?php echo $rows[name]; ?></td>
-                    <td><?php echo $rows[cpu]; ?></td>
-                    <td><?php echo $rows[ram]; ?></td>
-                    <td><?php echo $rows[hd0]; ?></td>
-                    <td><?php echo $rows[bandwidth]; ?></td>
-                    <td><?php echo $rows[control_panel]; ?></td>
+                    <td><?php echo $rows[location]; ?></td>
+                    <td><?php echo $rows[rack_name_number]; ?></td>
                     <td>
                         <?php
                         echo '<a href = "addonmodules.php?module=dsma&action=edit_server&server_id=' . $rows[server_id] . '" class = "some other classes"><i class = "fa fa-fw fa-pencil"></i></a>

@@ -334,5 +334,21 @@
                 </div>
             </div>
         </div>
+		<div class="col-lg-6">
+            <div class="form-group">
+                <label for="graphs" class="col-sm-4 control-label">Graphs:</label>
+                <div class="col-sm-8">
+				<?php
+					$url="http://cactistats.hostress.net/cacti/api/api.php";
+                    $url_d=$url."?switch=".$results['switch_id']."&port=".$results['switch_port']."&cycle=-1d";
+					$url_w=$url."?switch=".$results['switch_id']."&port=".$results['switch_port']."&cycle=-1w";
+					$url_m=$url."?switch=".$results['switch_id']."&port=".$results['switch_port']."&cycle=-1m";
+				?>
+				<label for="1dgraph" class="col-sm-4 control-label">1 Day Graph:</label><img src="<?php echo $url_d; ?>" /><br><br>
+				<label for="1wgraph" class="col-sm-4 control-label">1 Week Graph:</label><img src="<?php echo $url_w; ?>" /><br><br>
+				<label for="1dmgraph" class="col-sm-4 control-label">1 Month Graph:</label><img src="<?php echo $url_m; ?>" /><br><br>
+                </div>
+            </div>
+        </div>
     </div>
 <p><a class="btn btn-primary" href="<?php echo $modulelink; ?>">Back</a></p>

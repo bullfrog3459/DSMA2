@@ -124,7 +124,7 @@ function add_server($vars) {
 
 function edit_server($vars) {
     $id = $_GET['server_id'];
-    $query = full_query("SELECT *FROM mod_dsma WHERE server_id='$id' ");
+    $query = full_query("SELECT * FROM mod_dsma WHERE server_id='$id' ");
     $results = mysql_fetch_assoc($query);
     $modulelink = $vars['modulelink'];
     require_once 'views/edit_server.php';
@@ -132,7 +132,7 @@ function edit_server($vars) {
 
 function view_server($vars) {
     $id = $_GET['server_id'];
-    $query = full_query("SELECT *FROM mod_dsma WHERE server_id='$id' ");
+    $query = full_query("SELECT * FROM mod_dsma WHERE server_id='$id' ");
     $results = mysql_fetch_assoc($query);
     $modulelink = $vars['modulelink'];
     require_once 'views/view_server.php';
@@ -463,3 +463,4 @@ function add_shipment($vars) {
 
     require_once 'views/add_shipment.php';
 }
+

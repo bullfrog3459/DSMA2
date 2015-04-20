@@ -1,0 +1,77 @@
+function manageAPCPort($apcip, $apcport, $apcpass, $action) {
+	$apcportcontrolmib = ".1.3.6.1.4.1.318.1.1.12.3.3.1.1.4.";
+	$mib = $apcportcontrolmib.$apcport;
+
+	$result = snmpset($apcip, $apcpass, $mib, i, $action);
+
+	return $result;
+}
+
+function pdu_action($pdus, $action) {
+
+	$power = explode("\n",$pdus);
+
+	foreach($power as $value):
+		list($pdu,$pdu_port) = split(":",$value);
+
+
+		$sqlresult = mysql_query("SELECT address, username, password, community, Type FROM mod_pdu WHERE name='".strtoupper($pdu)."'");
+		$row = mysql_fetch_row($sqlresult);
+
+		$pdu_address	= trim($row[0]);
+		$pdu_username	= trim($row[1]);
+		$pdu_password	= trim($row[2]);
+		$pdu_community	= trim($row[3]);
+		$pdu_type	= trim($row[4]);
+
+		$pdu_port	= trim($pdu_port);
+		$pdu_type	= "APC";
+
+		switch (strtoupper($pdu_type)) {
+			case "APC":
+				switch (strtoupper($action)) {
+					case "OFF":
+						$pdu_action = "2";
+					break;
+					case "REBOOT":
+						$pdu_action = "3";
+					break;
+					default:
+						$pdu_action = "1";
+					break;
+				}
+				$apc = manageAPCPort($pdu_address, $pdu_port, $pdu_community, $pdu_action);
+			break;
+		}
+		if (!$apc){
+
+			$result .= $value." could not be set to ".$action."<br>";
+		}
+
+	endforeach;
+
+	return $result;
+}
+
+
+function modulename_AdminCustomButtonArray() {
+	# This function can define additional functions your module supports, the example here is a reboot button and then the reboot function is defined below
+    $buttonarray = array(
+	 "Reboot" => "reboot",
+	 "Power ON" => "on",
+	 "Power OFF" => "off",
+	);
+	return $buttonarray;
+}
+
+function modulename_reboot($params) {
+	return "asdfasf".pdu_action($params['customfields']['PDU'], "REBOOT");	
+}
+
+function modulename_on($params) {
+	return pdu_action($params['customfields']['PDU'], "ON");
+}
+
+function modulename_off($params) {
+	return pdu_action($params['customfields']['PDU'], "OFF");
+}

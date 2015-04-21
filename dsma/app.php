@@ -464,3 +464,11 @@ function add_shipment($vars) {
     require_once 'views/add_shipment.php';
 }
 
+
+function view_rack($vars) {
+    $modulelink = $vars['modulelink'];
+	$rackid = $_GET['rack_id'];
+	$res = mysql_query("select * from mod_dsma_rack where rack_id = '$rackid' ");
+	$row = mysql_fetch_array($res);
+	require_once 'views/view_rack.php';
+}

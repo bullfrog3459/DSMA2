@@ -21,7 +21,7 @@
             while ($rows = mysql_fetch_array($res)) {
                 ?>
                 <tr>
-                    <td><?php echo $rows[rack_name]; ?></td>
+                    <td><?php echo "<a href=addonmodules.php?module=dsma&action=view_rack&rack_id=" . $rows[rack_id] . ">" . $rows[rack_name] . "</a>"; ?></td>
                     <td><?php echo $rows[location_name]; ?></td>
                     <td><?php echo "<a href=clientssummary.php?userid=" . $rows[client_id] . ">" . $rows[firstname] . " " . $rows[lastname] . "</a>"; ?></td>
                     <td>

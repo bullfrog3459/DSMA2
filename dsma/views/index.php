@@ -40,8 +40,9 @@
                     <td><?php echo $rows[control_panel]; ?></td>
                     <td>
                         <?php
-                        echo '<a href = "addonmodules.php?module=dsma&action=edit_server&server_id=' . $rows[server_id] . '" class = "some other classes"><i class = "fa fa-fw fa-pencil"></i></a>
-<a href = "addonmodules.php?module=dsma&server_id=' . $rows[server_id] . '&client_id=' . $rows[client_id] . '&action=server_delete" class = "some other classes" data-confirm="Are you sure to delete this item?"><i class = "fa fa-fw fa-trash-o"></i></a>'
+                        $cnfrm = ' data-confirm-message="Are you sure you want to delete this server"';
+                        echo '<a href = "addonmodules.php?module=dsma&action=edit_server&server_id=' . $rows[server_id] . '" class = "some other classes" ><i class = "fa fa-fw fa-pencil"></i></a>
+<a href = "addonmodules.php?module=dsma&server_id=' . $rows[server_id] . '&client_id=' . $rows[client_id] . '&action=server_delete" class = "some other classes cnfrm" onclick="" ' . $cnfrm . '><i class = "fa fa-fw fa-trash-o"></i></a>'
                         ?></td>
                 </tr>
                 <?php
@@ -51,3 +52,14 @@
     </table>
     <p>You currently have a total of <b><?php echo $numservers; ?></b> Servers.</p>
 </div>
+
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="<?php echo $vars['moduledir'] ?>js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<?php echo $vars['moduledir'] ?>js/confirm-bootstrap.js"></script>
+<script type="text/javascript">
+    $.noConflict();
+
+    jQuery(document).ready(function () {
+        jQuery('.cnfrm').confirmModal();
+    });
+</script>
